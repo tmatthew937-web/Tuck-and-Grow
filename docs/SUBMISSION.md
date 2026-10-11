@@ -9,8 +9,8 @@ Rules checked October 10, 2026. Submission deadline: November 12, 2026, noon Pac
 | Requirement | Current state | Remaining work |
 | --- | --- | --- |
 | Working PayPal + AI application | Sandbox checkout and live OpenAI planner implemented; owner-reported checks passed | Repeat the full judge walkthrough in the final build |
-| Public source repository | Source retained in the Sites repository | Publish a clean copy to GitHub, GitLab, or Bitbucket; confirm public accessibility |
-| Open-source license | MIT license prepared in the source tree | Include it in the public repository and preserve third-party notices |
+| Public source repository | Published at https://github.com/tmatthew937-web/Tuck-and-Grow; public visibility verified October 10, 2026 | Keep it updated with the final demonstrated build |
+| Open-source license | MIT license published; third-party notices preserved | Complete |
 | Working build accessible to judges | Hosted build is private | Establish free judge access and test it; provide complete access instructions |
 | Written description | Draft below | Review and enter it into Devpost |
 | Public YouTube demonstration under 3 minutes | Recording outline prepared below | Record, upload publicly, verify the link, and add it to Devpost |

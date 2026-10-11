@@ -38,4 +38,4 @@ Buckets are bookkeeping earmarks. They do not create PayPal wallets or Savings G
 
 ## Submission status
 
-The owner reported successful checks of both numeric planner examples, sandbox checkout, a $5 expense, persistence after refresh, and monthly totals on October 6, 2026. Those are owner-reported UI checks. A judge-access session, fresh-clone local run, exported CSV review, and public repository publication remain to be verified before submission.
+The owner reported successful checks of both numeric planner examples, sandbox checkout, a $5 expense, persistence after refresh, and monthly totals on October 6, 2026. Those are owner-reported UI checks. The public source repository and MIT license were published and verified on October 10, 2026: https://github.com/tmatthew937-web/Tuck-and-Grow. A judge-access session, fresh-clone local run, and exported CSV review remain to be verified before submission.
