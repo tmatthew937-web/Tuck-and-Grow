@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {DEFAULT_RULES,BUCKETS,split,refundAllocation,cents,validRules} from '../lib/budget.ts';
+test('reserve first, then divide the remainder 60/40',()=>assert.deepEqual(split(10000,DEFAULT_RULES),{tax:2000,business:4800,personal:3200}));
+test('allocation conserves every cent for small amounts and percentage boundaries',()=>{for(const reserve of [0,1,20,33,99,100])for(const business of [0,1,40,60,99,100])for(const n of [0,1,2,3,7,19,101,9999,10000,10001]){const a=split(n,{...DEFAULT_RULES,reserve,business});assert.equal(BUCKETS.reduce((s,k)=>s+a[k],0),n);for(const k of BUCKETS)assert.ok(Number.isSafeInteger(a[k])&&a[k]>=0);}});
+test('dollars convert to exact integer cents',()=>{assert.equal(cents('0.01'),1);assert.equal(cents('0.10'),10);assert.equal(cents('100.05'),10005);for(const v of ['-1','0','1.001','NaN','1e3'])assert.throws(()=>cents(v));});
+test('invalid percentages and empty bucket names are rejected',()=>{assert.throws(()=>validRules({...DEFAULT_RULES,reserve:101}));assert.throws(()=>validRules({...DEFAULT_RULES,business:-1}));assert.throws(()=>validRules({...DEFAULT_RULES,names:{...DEFAULT_RULES.names,tax:''}}));});
+test('sequential partial refunds exactly unwind the original allocations',()=>{for(const gross of [1,2,3,7,101,10000]){const original=split(gross,DEFAULT_RULES);let prior={tax:0,business:0,personal:0};let refunded=0;for(const amount of [Math.floor(gross/3),gross-Math.floor(gross/3)]){if(!amount)continue;refunded+=amount;const delta=refundAllocation(original,prior,refunded);assert.equal(BUCKETS.reduce((s,k)=>s+delta[k],0),-amount);for(const k of BUCKETS)prior[k]+=delta[k];}for(const k of BUCKETS)assert.equal(original[k]+prior[k],0);}});
+test('refunds cannot exceed the original allocation',()=>assert.throws(()=>refundAllocation(split(100,DEFAULT_RULES),{tax:0,business:0,personal:0},101)));
